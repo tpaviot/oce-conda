@@ -22,21 +22,21 @@ requirements:
   build:
     - patch             [win]
     - ninja             [win]
-    - gl2ps
+    #- gl2ps
     - freeimage
     - tbb
     - python
     - freetype
-    - vtk >=6.3.0
+    #- vtk >=6.3.0
     - cmake
     - gcc [linux]
 
   run:
-    - gl2ps
+    #- gl2ps
     - freeimage
     - tbb
     - freetype
-    - vtk >=6.3.0
+    #- vtk >=6.3.0
 
 about:
   home: https://github.com/tpaviot/oce
