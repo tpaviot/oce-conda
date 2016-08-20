@@ -60,6 +60,8 @@ before_install:
   - conda info -a
    # Add dlr-sc channel for third part libraries
   - conda config --add channels https://conda.anaconda.org/dlr-sc
+  # Add the following for tbb linux 32 bit
+  - conda config --add channels https://conda.anaconda.org/msarahan
   # install everything required to build the receipe
   - conda install conda-build anaconda-client
 
