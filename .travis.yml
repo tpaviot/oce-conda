@@ -2,14 +2,6 @@ sudo: false
 
 language: cpp
 
-#os: 
-#  - osx
-#  - linux
-
-#compiler: REMOVE comments to test both gcc and clang compilers
-  #- gcc
-  #- clang
-# Install packages for cross-compilation to 32 Bit
 addons:
   apt:
     packages:
@@ -66,7 +58,7 @@ before_install:
   - conda update -q conda
   # Useful for debugging any issues with conda
   - conda info -a
-   # download/install OCE from DLR-SC channel
+   # Add dlr-sc channel for third part libraries
   - conda config --add channels https://conda.anaconda.org/dlr-sc
   # install everything required to build the receipe
   - conda install conda-build anaconda-client
