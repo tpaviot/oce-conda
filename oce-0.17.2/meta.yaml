@@ -29,7 +29,7 @@ requirements:
     - freetype
     #- vtk >=6.3.0
     - cmake
-    - gcc [linux]
+    #- gcc [linux]
 
   run:
     #- gl2ps
