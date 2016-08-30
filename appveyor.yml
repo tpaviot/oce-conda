@@ -49,7 +49,7 @@ install:
   # as well as pip, conda-build, and the binstar CLI
   - powershell .\\appveyor\\appveyor_install_conda.ps1
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - "%CMD_IN_ENV% conda config --add channels https://conda.anaconda.org/dlr-sc"
+  - "conda config --add channels https://conda.anaconda.org/dlr-sc"
 
 build: false
 
@@ -63,7 +63,7 @@ test_script:
   # is set dynamically. This unfortunately mean that conda build --output
   # doesn't really work.
   #
-  - "%CMD_IN_ENV% conda build .\\oce-0.17.2 --quiet"
+  - "conda build .\\oce-0.17.2 --quiet"
   # Move the conda package into the current directory, to register it
   # as an "artifact" for Appveyor. cmd.exe does't have good globbing, so
   # we'll use a simple python script.
