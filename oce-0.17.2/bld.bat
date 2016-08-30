@@ -19,11 +19,11 @@ cmake -G "Ninja" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
 if errorlevel 1 exit 1
  
 REM Build step 
-ninja
+ninja > build_log.txt
 if errorlevel 1 exit 1
 
 REM Install step
-ninja install
+ninja install > installed_files.txt
 if errorlevel 1 exit 1
 
 REM Fix hardcoded absolute freetype paths
