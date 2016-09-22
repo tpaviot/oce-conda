@@ -22,7 +22,7 @@ cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
  -DOCE_INSTALL_PREFIX=$PREFIX -DOCE_ENABLE_DEB_FLAG=OFF ..
 
 # Build step
-make -j $CPU_COUNT
+make -j $CPU_COUNT > build_log.txt
 
 # Install step
 make install
