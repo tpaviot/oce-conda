@@ -5,7 +5,7 @@ environment:
     # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
     # /E:ON and /V:ON options are not enabled in the batch script intepreter
     # See: http://stackoverflow.com/a/13751649/163740
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\run_with_env.cmd"
+    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\obvci_appveyor_python_build_env.cmd"
   
     # Workaround for https://github.com/conda/conda-build/issues/636
     PYTHONIOENCODING: "UTF-8"
@@ -15,27 +15,21 @@ environment:
     # Not sure how to resolve this, but maybe we should be tracking the VS version in the build string anyway?
     - TARGET_ARCH: "x86"
       CONDA_PY: "27"
-      PY_CONDITION: "python >=2.7,<3"
       CONDA_INSTALL_LOCN: "C:\\Miniconda"
     - TARGET_ARCH: "x86"
       CONDA_PY: "34"
-      PY_CONDITION: "python >=3.4,<3.5"
       CONDA_INSTALL_LOCN: "C:\\Miniconda3"
     - TARGET_ARCH: "x86"
       CONDA_PY: "35"
-      PY_CONDITION: "python >=3.5"
       CONDA_INSTALL_LOCN: "C:\\Miniconda35"
     - TARGET_ARCH: "x64"
       CONDA_PY: "27"
-      PY_CONDITION: "python >=2.7,<3"
       CONDA_INSTALL_LOCN: "C:\\Miniconda-x64"
     - TARGET_ARCH: "x64"
       CONDA_PY: "34"
-      PY_CONDITION: "python >=3.4,<3.5"
       CONDA_INSTALL_LOCN: "C:\\Miniconda3-x64"
     - TARGET_ARCH: "x64"
       CONDA_PY: "35"
-      PY_CONDITION: "python >=3.5"
       CONDA_INSTALL_LOCN: "C:\\Miniconda35-x64"
 
 artifacts:
