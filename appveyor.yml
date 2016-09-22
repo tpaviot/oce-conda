@@ -6,52 +6,72 @@ environment:
     # /E:ON and /V:ON options are not enabled in the batch script intepreter
     # See: http://stackoverflow.com/a/13751649/163740
     CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\run_with_env.cmd"
+  
+    # Workaround for https://github.com/conda/conda-build/issues/636
+    PYTHONIOENCODING: "UTF-8"
 
   matrix:
-    - PYTHON: "C:\\Python27_32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "32"
+    # Note: Because we have to separate the py2 and py3 components due to compiler version, we have a race condition for non-python packages.
+    # Not sure how to resolve this, but maybe we should be tracking the VS version in the build string anyway?
+    - TARGET_ARCH: "x86"
       CONDA_PY: "27"
-      CONDA_NPY: "18"
-
-    - PYTHON: "C:\\Python27_64"
-      PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "64"
+      PY_CONDITION: "python >=2.7,<3"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda"
+    - TARGET_ARCH: "x86"
+      CONDA_PY: "34"
+      PY_CONDITION: "python >=3.4,<3.5"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda3"
+    - TARGET_ARCH: "x86"
+      CONDA_PY: "35"
+      PY_CONDITION: "python >=3.5"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda35"
+    - TARGET_ARCH: "x64"
       CONDA_PY: "27"
-      CONDA_NPY: "18"
-
-    - PYTHON: "C:\\Python34_32"
-      PYTHON_VERSION: "3.4"
-      PYTHON_ARCH: "32"
+      PY_CONDITION: "python >=2.7,<3"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda-x64"
+    - TARGET_ARCH: "x64"
       CONDA_PY: "34"
-      CONDA_NPY: "18"
-
-    - PYTHON: "C:\\Python34_64"
-      PYTHON_VERSION: "3.4"
-      PYTHON_ARCH: "64"
-      CONDA_PY: "34"
-      CONDA_NPY: "18"
-
-    - PYTHON: "C:\\Python35_32"
-      PYTHON_VERSION: "3.5"
-      PYTHON_ARCH: "32"
+      PY_CONDITION: "python >=3.4,<3.5"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda3-x64"
+    - TARGET_ARCH: "x64"
       CONDA_PY: "35"
-      CONDA_NPY: "18"
+      PY_CONDITION: "python >=3.5"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda35-x64"
 
-    - PYTHON: "C:\\Python35_64"
-      PYTHON_VERSION: "3.5"
-      PYTHON_ARCH: "64"
-      CONDA_PY: "35"
-      CONDA_NPY: "18"
+artifacts:
+    # Store built conda packages as artifacts
+    - path: 'conda_packages\*.bz2'
+
+# We always use a 64-bit machine, but can build x86 distributions
+# with the TARGET_ARCH variable (which is used by CMD_IN_ENV).
+platform:
+    - x64
 
 install:
-  # this installs the appropriate Miniconda (Py2/Py3, 32/64 bit),
-  # as well as pip, conda-build, and the binstar CLI
-  - powershell .\\appveyor\\appveyor_install_conda.ps1
-  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - "conda config --add channels https://conda.anaconda.org/dlr-sc"
+    # Set the CONDA_NPY, although it has no impact on the actual build. We need this because of a test within conda-build.
+    - cmd: set CONDA_NPY=19
 
-build: false
+    # Remove cygwin (and therefore the git that comes with it).
+    - cmd: rmdir C:\cygwin /s /q
+
+    # Use the pre-installed Miniconda for the desired arch
+    #
+    # However, it is really old. So, we need to update some
+    # things before we proceed. That seems to require it being
+    # on the path. So, we temporarily put conda on the path
+    # so that we can update it. Then we remove it so that
+    # we can do a proper activation.
+    - cmd: set "OLDPATH=%PATH%"
+    - cmd: set "PATH=%CONDA_INSTALL_LOCN%\\Scripts;%CONDA_INSTALL_LOCN%\\Library\\bin;%PATH%"
+    - cmd: conda update --yes conda
+    - cmd: set "PATH=%OLDPATH%"
+    - cmd: call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
+    - cmd: conda config --set show_channel_urls true
+    - cmd: conda update --yes --quiet conda
+    - cmd: conda install --yes conda-build=1.20
+
+# Skip .NET project specific build phase.
+build: off
 
 test_script:
   # Build and test the package. This appears(?) to sporadically fail due to a 
@@ -64,10 +84,11 @@ test_script:
   # doesn't really work.
   #
   - "%CMD_IN_ENV% conda build .\\oce-0.17.2 --quiet"
-  # Move the conda package into the current directory, to register it
-  # as an "artifact" for Appveyor. cmd.exe does't have good globbing, so
-  # we'll use a simple python script.
-  - "%CMD_IN_ENV% %PYTHON%/python appveyor\\move-conda-package.py"
+  - cmd: mkdir conda_packages
+  # Uncomment the following two lines to make any conda packages created
+  # available as build artifacts in AppVeyor
+  - cmd: 'copy /Y C:\Miniconda\conda-bld\win-32\*.bz2 conda_packages || cmd /c "exit /b 0"'
+  - cmd: 'copy /Y C:\Miniconda-x64\conda-bld\win-64\*.bz2 conda_packages || cmd /c "exit /b 0"'
 
 artifacts:
   # Archive the generated conda package in the ci.appveyor.com build report.

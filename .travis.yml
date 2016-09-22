@@ -64,7 +64,7 @@ before_install:
   # Add the following for tbb linux 32 bit
   - conda config --add channels https://conda.anaconda.org/msarahan
   # install everything required to build the receipe
-  - conda install conda-build anaconda-client
+  - conda install conda-build=1.20 anaconda-client
 
 
 script:
