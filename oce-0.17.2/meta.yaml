@@ -7,7 +7,7 @@ source:
   url: https://github.com/tpaviot/oce/archive/OCE-0.17.2.tar.gz
   patches:
     - fix_tkopengl_dll_path.patch [win]
-    #- oce-nullrefs-fix.patch
+    - oce-nullrefs-fix.patch
     #- vtk.patch
 
 build:
@@ -22,17 +22,17 @@ requirements:
   build:
     - patch             [win]
     - ninja             [win]
-    #- gl2ps
+    - gl2ps
     - freeimage
     - tbb
     - python
     - freetype
     #- vtk >=6.3.0
     - cmake
-    #- gcc [linux]
+    - gcc [linux]
 
   run:
-    #- gl2ps
+    - gl2ps
     - freeimage
     - tbb
     - freetype
