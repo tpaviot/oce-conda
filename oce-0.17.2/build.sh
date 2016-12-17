@@ -1,7 +1,7 @@
-if [ `uname` == Darwin ]; then
-	# the vtk config files use some system specific libs which we have to remove
-    python $RECIPE_DIR/remove-system-libs.py $PREFIX/lib/cmake/vtk-6.3/VTKTargets.cmake
-fi
+#if [ `uname` == Darwin ]; then
+#	# the vtk config files use some system specific libs which we have to remove
+#    python $RECIPE_DIR/remove-system-libs.py $PREFIX/lib/cmake/vtk-6.3/VTKTargets.cmake
+#fi
 
 
 mkdir build
@@ -25,7 +25,7 @@ cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
 make -j $CPU_COUNT | grep Built
 
 # Install step
-make install
+make install > installed_files.log  # to reduce the number of lines to the console
 
 if [ `uname` != Darwin ]; then
     python $RECIPE_DIR/remove-system-libs.py $PREFIX/lib/oce-0.17/OCE-libraries-release.cmake
