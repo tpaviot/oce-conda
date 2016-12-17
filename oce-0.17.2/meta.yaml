@@ -7,7 +7,7 @@ source:
   url: https://github.com/tpaviot/oce/archive/OCE-0.17.2.tar.gz
   patches:
     - fix_tkopengl_dll_path.patch [win]
-    - oce-nullrefs-fix.patch
+    #- oce-nullrefs-fix.patch
     #- vtk.patch
 
 build:
