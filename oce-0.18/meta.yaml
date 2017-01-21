@@ -6,7 +6,8 @@ source:
   fn: OCE-0.18.tar.gz
   url: https://github.com/tpaviot/oce/archive/OCE-0.18.tar.gz
   patches:
-    - fix_tkopengl_dll_path.patch [win]
+    #- fix_tkopengl_dll_path.patch [win]
+    - fix_cmakelist.patch
     #- oce-nullrefs-fix.patch
     #- vtk.patch
 
