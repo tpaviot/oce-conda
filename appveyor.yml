@@ -1,4 +1,4 @@
-version: oce-0.17.2.{build}
+version: oce-0.18.{build}
 
 environment:
   global:
@@ -72,7 +72,7 @@ test_script:
   # is set dynamically. This unfortunately mean that conda build --output
   # doesn't really work.
   #
-  - "%CMD_IN_ENV% conda build .\\oce-0.17.2 --quiet"
+  - "%CMD_IN_ENV% conda build .\\oce-0.18 --quiet"
   - cmd: mkdir conda_packages
   # Uncomment the following two lines to make any conda packages created
   # available as build artifacts in AppVeyor
