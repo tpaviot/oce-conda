@@ -8,7 +8,7 @@ mkdir build
 cd build
 
 # Configure step
-cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
+cmake -G Ninja -DCMAKE_INSTALL_PREFIX=$PREFIX \
  -DCMAKE_BUILD_TYPE=Release \
  -DOCE_TESTING=OFF \
  -DCMAKE_PREFIX_PATH=$PREFIX \
@@ -22,13 +22,15 @@ cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
  -DOCE_INSTALL_PREFIX=$PREFIX -DOCE_ENABLE_DEB_FLAG=OFF ..
 
 # Build step
-if [ `uname` == Darwin ]; then
-  make -j 5 | grep Built  # set to 5 on travis
-else
-  make -j $CPU_COUNT | grep Built
-fi
+ninja > build.log
+#if [ `uname` == Darwin ]; then
+  #make -j 5 | grep Built  # set to 5 on travis
+#else
+  #make -j $CPU_COUNT | grep Built
+#fi
 # Install step
-make install > installed_files.log  # to reduce the number of lines to the console
+ninja install > installed_files.txt
+#make install > installed_files.log  # to reduce the number of lines to the console
 
 if [ `uname` != Darwin ]; then
     python $RECIPE_DIR/remove-system-libs.py $PREFIX/lib/oce-0.18/OCE-libraries-release.cmake

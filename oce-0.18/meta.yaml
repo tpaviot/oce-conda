@@ -21,7 +21,7 @@ build:
 requirements:
   build:
     - patch             [win]
-    - ninja             [win]
+    - ninja
     - gl2ps
     - freeimage
     - tbb
