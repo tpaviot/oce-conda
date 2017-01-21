@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 74a854b..e3dc421 100644
+index 74a854b..eae9f31 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -74,9 +74,9 @@ if(NOT CMAKE_CONFIGURATION_TYPES)
@@ -14,7 +14,18 @@ index 74a854b..e3dc421 100644
  
  if(MSVC)
  	option_with_default( OCE_INSTALL_PDB_FILES "Install PDB files (debug informations)" ON )
-@@ -450,7 +450,6 @@ if(OCE_VISUALISATION)
+@@ -417,6 +417,10 @@ if(OCE_MULTITHREAD_LIBRARY STREQUAL "TBB")
+ 				find_library( TBB_MALLOC_LIBRARY_DEBUG tbbmalloc_debug PATHS "${TBB_LIB_DIR}" "Path to the TBB MALLOC debug library")
+ 			endif (OCE_TBB_MALLOC_SUPPORT)
+ 		endif(CMAKE_CONFIGURATION_TYPES OR NMAKE)
++
++		message(STATUS "TBB_INCLUDE_DIR: ${TBB_INCLUDE_DIR}")
++		message(STATUS "TBB_LIBRARY: ${TBB_LIBRARY}")
++		message(STATUS "TBB_MALLOC_LIBRARY: ${TBB_MALLOC_LIBRARY}")
+ 	endif(TBB_INCLUDE_DIR)
+ 	mark_as_advanced(TBB_INCLUDE_DIR TBB_LIBRARY)
+ endif(OCE_MULTITHREAD_LIBRARY STREQUAL "TBB")
+@@ -450,7 +454,6 @@ if(OCE_VISUALISATION)
  		find_path(FREEIMAGE_INCLUDE_DIR FreeImagePlus.h DOC "Location of header files for FreeImage" ${CMAKE_SYSTEM_INCLUDE_PATH})
  		if(FREEIMAGE_INCLUDE_DIR)
  			find_library( FREEIMAGE_LIBRARY freeimage "Path to the freeimage library" )
@@ -22,7 +33,7 @@ index 74a854b..e3dc421 100644
  			if(CMAKE_CONFIGURATION_TYPES OR NMAKE)
  				find_library( FREEIMAGE_LIBRARY_DEBUG freeimaged "Path to the freeimage debug library" )
  			endif(CMAKE_CONFIGURATION_TYPES OR NMAKE)
-@@ -465,6 +464,8 @@ if(OCE_VISUALISATION)
+@@ -465,6 +468,8 @@ if(OCE_VISUALISATION)
  			endif(FREEIMAGE_INCLUDE_DIR)
  			mark_as_advanced(FREEIMAGEPLUS_LIBRARY)
  		endif(WIN32)
@@ -31,11 +42,11 @@ index 74a854b..e3dc421 100644
  	endif(OCE_WITH_FREEIMAGE)
  
  	if (NOT WIN32 AND NOT OCE_OSX_USE_COCOA)
-@@ -497,6 +498,8 @@ if(OCE_VISUALISATION)
+@@ -497,6 +502,8 @@ if(OCE_VISUALISATION)
  			endif(CMAKE_CONFIGURATION_TYPES OR NMAKE)
  		endif(GL2PS_INCLUDE_DIR)
  		mark_as_advanced(GL2PS_INCLUDE_DIR GL2PS_LIBRARY)
-+		message(STATUS "GL2PS_LIBRARY: ${GL2PS_LIBRARY}")
++		message(STATUS "GL2PS_INCLUDE_DIR: ${GL2PS_INCLUDE_DIR}")
 +		message(STATUS "GL2PS_LIBRARY: ${GL2PS_LIBRARY}")
  	endif(OCE_WITH_GL2PS)
  
