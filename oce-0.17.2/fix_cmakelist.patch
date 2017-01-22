@@ -1,19 +1,7 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 74a854b..eae9f31 100644
+index 74a854b..94c387a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -74,9 +74,9 @@ if(NOT CMAKE_CONFIGURATION_TYPES)
- 	endif(CMAKE_BUILD_TYPE STREQUAL "")
- endif(NOT CMAKE_CONFIGURATION_TYPES)
- 
--if(CMAKE_BUILD_TOOL STREQUAL "nmake")
-+if(CMAKE_BUILD_TOOL STREQUAL "nmake" OR CMAKE_GENERATOR STREQUAL "Ninja")
- 	set(NMAKE TRUE)
--endif(CMAKE_BUILD_TOOL STREQUAL "nmake")
-+endif(CMAKE_BUILD_TOOL STREQUAL "nmake" OR CMAKE_GENERATOR STREQUAL "Ninja")
- 
- if(MSVC)
- 	option_with_default( OCE_INSTALL_PDB_FILES "Install PDB files (debug informations)" ON )
 @@ -417,6 +417,10 @@ if(OCE_MULTITHREAD_LIBRARY STREQUAL "TBB")
  				find_library( TBB_MALLOC_LIBRARY_DEBUG tbbmalloc_debug PATHS "${TBB_LIB_DIR}" "Path to the TBB MALLOC debug library")
  			endif (OCE_TBB_MALLOC_SUPPORT)
