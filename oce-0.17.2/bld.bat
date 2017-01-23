@@ -1,6 +1,6 @@
 mkdir build
 cd build
-
+dir "%LIBRARY_PREFIX%"\include\
 REM Configure step
 cmake -G "Ninja" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
  -DCMAKE_BUILD_TYPE=Release ^
