@@ -26,10 +26,6 @@ environment:
       CONDA_PY: "35"
       CONDA_INSTALL_LOCN: "C:\\Miniconda35-x64"
 
-artifacts:
-    # Store built conda packages as artifacts
-    - path: 'conda_packages\*.bz2'
-
 # We always use a 64-bit machine, but can build x86 distributions
 # with the TARGET_ARCH variable (which is used by CMD_IN_ENV).
 platform:
@@ -73,7 +69,7 @@ test_script:
   # doesn't really work.
   #
   - "%CMD_IN_ENV% conda build .\\oce-0.17.2 --no-remove-work-dir"
-# move conda package to /dist
+  # move conda package to /dist
   - cmd: 'mkdir dist'
   - cmd: 'copy /Y %PYTHON%\conda-bld\win-%PYTHON_ARCH%\oce*.bz2 dist || cmd /c "exit /b 0"'
 
