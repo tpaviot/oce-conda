@@ -69,9 +69,9 @@ test_script:
   # doesn't really work.
   #
   - "%CMD_IN_ENV% conda build .\\oce-0.17.2 --no-remove-work-dir"
-  # move conda package to /dist
+# move conda package to /dist
   - cmd: 'mkdir dist'
-  - cmd: 'copy /Y %PYTHON%\conda-bld\win-%PYTHON_ARCH%\oce*.bz2 dist || cmd /c "exit /b 0"'
+  - cmd: 'copy /Y %CONDA_INSTALL_LOCN%\conda-bld\win-%PYTHON_ARCH%\oce*.bz2 dist || cmd /c "exit /b 0"'
 
 artifacts:
   - path: dist\*
