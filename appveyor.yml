@@ -77,6 +77,7 @@ test_script:
   - cmd: 'mkdir dist'
   - cmd: 'dir %CONDA_INSTALL_LOCN%\conda-bld\win-%ARCH%\'
   - cmd: 'copy /Y %CONDA_INSTALL_LOCN%\conda-bld\win-ARCH%\oce*.bz2 dist || cmd /c "exit /b 0"'
+  - cmd: 'dir dist'
 
 artifacts:
   - path: dist\*
