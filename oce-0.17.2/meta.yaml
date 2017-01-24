@@ -12,8 +12,7 @@ source:
     #- vtk.patch
 
 build:
-  binary_relocation: False
-  detect_binary_files_with_prefix: False
+  detect_binary_files_with_prefix: True
   number: 1
   features:
     - vc9               [win and py27]
