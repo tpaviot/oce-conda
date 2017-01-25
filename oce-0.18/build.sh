@@ -11,7 +11,7 @@ cd build
 cmake -G Ninja -DCMAKE_INSTALL_PREFIX=$PREFIX \
  -DCMAKE_BUILD_TYPE=Release \
  -DOCE_TESTING=OFF \
- -DOCE_USE_PCH=ON \
+ -DOCE_USE_PCH=OFF \
  -DOCE_COPY_HEADERS_BUILD=ON \
  -DCMAKE_PREFIX_PATH=$PREFIX \
  -DCMAKE_SYSTEM_PREFIX_PATH=$PREFIX \
@@ -26,7 +26,7 @@ cmake -G Ninja -DCMAKE_INSTALL_PREFIX=$PREFIX \
  -DOCE_INSTALL_PREFIX=$PREFIX -DOCE_ENABLE_DEB_FLAG=OFF ..
 
 # Build step
-ninja
+ninja | grep Linking
 #if [ `uname` == Darwin ]; then
   #make -j 5 | grep Built  # set to 5 on travis
 #else
