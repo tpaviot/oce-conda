@@ -54,7 +54,7 @@ before_install:
 
 script:
   - conda build oce-0.17.2
-  #- conda build oce-0.18
+  - conda build oce-0.18
 
 after_success:
   - python move-conda-package.py

@@ -19,7 +19,6 @@ build:
 requirements:
   build:
     - patch             [win]
-    - gcc               [linux]
     - ninja
     - gl2ps
     - freeimage
