@@ -1,0 +1,35 @@
+﻿package:
+  name: oce
+  version: 0.17.3
+
+source:
+  git_url: https://github.com/tpaviot/oce.git
+  git_tag: review/oce-0.17.3
+
+build:
+  detect_binary_files_with_prefix: True
+  number: 1
+  features:
+    - vc9               [win and py27]
+    - vc14              [win and py35]
+
+requirements:
+  build:
+    - ninja
+    - gl2ps
+    - freeimage
+    - tbb
+    - python
+    - freetype
+    - cmake
+
+  run:
+    - gl2ps
+    - freeimage
+    - tbb
+    - freetype
+
+about:
+  home: https://github.com/tpaviot/oce
+  license: LGPL
+  summary: OpenCASCADE community edition
