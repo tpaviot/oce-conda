@@ -7,6 +7,7 @@ cmake -G "Ninja" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
  -DOCE_NO_LIBRARY_VERSION=ON ^
  -DOCE_TESTING=OFF ^
  -DOCE_USE_PCH=OFF ^
+ -DOCE_EXTRA_WARNINGS=ON ^
  -DOCE_COPY_HEADERS_BUILD=ON ^
  -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%" ^
  -DCMAKE_SYSTEM_PREFIX_PATH="%LIBRARY_PREFIX%" ^
@@ -21,7 +22,7 @@ cmake -G "Ninja" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
 if errorlevel 1 exit 1
  
 REM Build step 
-ninja > build_files.txt
+ninja > stdout.txt
 if errorlevel 1 exit 1
 
 REM Install step
