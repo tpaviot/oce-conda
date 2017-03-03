@@ -3,8 +3,8 @@
   version: 0.17.3
 
 source:
-  git_url: https://github.com/tpaviot/oce.git
-  git_tag: OCE-0.17.3
+  fn: OCE-0.17.3.tar.gz
+  url: https://github.com/tpaviot/oce/archive/OCE-0.17.3.tar.gz
 
 build:
   detect_binary_files_with_prefix: True
