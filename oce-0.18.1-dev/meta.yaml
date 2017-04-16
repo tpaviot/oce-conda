@@ -1,0 +1,39 @@
+﻿package:
+  name: oce
+  version: 0.18.1
+
+source:
+  git_url: https://github.com/tpaviot/oce.git
+  git_tag: master
+  patches:
+    - fix_cmakelist.patch
+
+build:
+  detect_binary_files_with_prefix: True
+  number: 1
+  features:
+    - vc9               [win and py27]
+    - vc10              [win and py34]
+    - vc14              [win and py35]
+
+requirements:
+  build:
+    - patch             [win]
+    - ninja
+    - gl2ps
+    - freeimage
+    - tbb
+    - python
+    - freetype
+    - cmake
+
+  run:
+    - gl2ps
+    - freeimage
+    - tbb
+    - freetype
+
+about:
+  home: https://github.com/tpaviot/oce
+  license: LGPL
+  summary: OpenCASCADE community edition
