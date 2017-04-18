@@ -17,7 +17,7 @@ requirements:
   build:
     - ninja
     - gl2ps
-    - freeimage
+    - freeimageplus
     - tbb
     - python
     - freetype
@@ -25,7 +25,7 @@ requirements:
 
   run:
     - gl2ps
-    - freeimage
+    - freeimageplus
     - tbb
     - freetype
 
