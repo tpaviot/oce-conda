@@ -73,7 +73,9 @@ test_script:
   # doesn't really work.
   #
   #- "%CMD_IN_ENV% conda build .\\oce-0.18.1-dev --no-remove-work-dir"
-  - "%CMD_IN_ENV% conda build .\\oce-0.17.3 --no-remove-work-dir"
+  #- "%CMD_IN_ENV% conda build .\\oce-0.17.3 --no-remove-work-dir"
+  - "%CMD_IN_ENV% conda build .\\oce-0.18.1 --no-remove-work-dir"
+
 # move conda package to /dist
   - cmd: 'mkdir dist'
   - cmd: 'copy /Y %CONDA_INSTALL_LOCN%\conda-bld\win-%ARCH%\oce*.bz2 dist || cmd /c "exit /b 0"'
