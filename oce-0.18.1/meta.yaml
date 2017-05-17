@@ -11,25 +11,23 @@ build:
   number: 1
   features:
     - vc9               [win and py27]
-    - vc10              [win and py34]
     - vc14              [win and py35]
 
 requirements:
   build:
-    - patch             [win]
-    - ninja
-    - gl2ps
-    - freeimageplus
-    - tbb
+    - ninja ==1.7.2
+    - gl2ps ==1.3.8
+    - freeimageplus ==3.17.0
+    - tbb ==2017_20170226
     - python
-    - freetype
-    - cmake
+    - freetype ==2.7
+    - cmake ==3.8.0
 
   run:
-    - gl2ps
-    - freeimageplus
-    - tbb
-    - freetype
+    - gl2ps ==1.3.8
+    - freeimageplus ==3.17.0
+    - tbb ==2017_20170226
+    - freetype ==2.7
 
 about:
   home: https://github.com/tpaviot/oce
