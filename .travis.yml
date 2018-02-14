@@ -44,14 +44,15 @@ before_install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
+  # install everything required to build the receipe
+  - conda install conda-build anaconda-client
   # Useful for debugging any issues with conda
   - conda info -a
   # Add dlr-sc channel for third part libraries
   # necessary because of gl2ps
   - conda config --add channels https://conda.anaconda.org/dlr-sc
   - conda config --add channels https://conda.anaconda.org/conda-forge
-  # install everything required to build the receipe
-  - conda install conda-build anaconda-client
+
 
 script:
   #- conda build oce-0.17.2
